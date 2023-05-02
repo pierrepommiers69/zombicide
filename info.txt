@@ -11,6 +11,6 @@ git commit -m "yourWallet0.1" -m "id = 1"
 -m "type of job = Art"
 -m "description = ..."
 
-key of the project : 
+key of the project : s
 
-tokenid = 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
+tokenid = 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
