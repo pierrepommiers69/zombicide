@@ -8,6 +8,7 @@ public class Run
 	public static void main(String[] args) 	
 	{
 		int[] plateauTest = new int[]{3,1,1,1,1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,0,0,1,0,1,1,0,1,1,1,0,0,1,1,1,1,0,1,1,1};
+		Plateau newPaPlateau = new Plateau(plateauTest, 10, 10);
 		Scanner scanner = new Scanner(System.in);
 		int verifyNmbJoueur = 0;
 		InitJeu newJeu = null;
@@ -17,6 +18,7 @@ public class Run
 		String nmbJoueur = scanner.nextLine();
 		System.out.println("entrer une Difficulté HARD/MEDIUM/EASY");
 		String difficulte = scanner.nextLine();
+		newPaPlateau.PrintPlateau();
 
 		while(verifyNmbJoueur == 0)
 		{
