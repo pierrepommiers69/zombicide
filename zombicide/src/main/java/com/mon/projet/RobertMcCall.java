@@ -2,7 +2,7 @@ package com.mon.projet;
 
 import java.util.ArrayList;
 
-public class RobertMcCall
+public class RobertMcCall extends Personnage
 {
     private String nom;
     private int pointsDeVie;
@@ -29,57 +29,74 @@ public class RobertMcCall
         this.competenceUnique = "Architecte Suprême";
         this.competencePassive = "Chronomètre";
     }
-    public String getNom() 
+    @Override
+    public String GetNom() 
     {
         return this.nom;
     }
-    
-    public int getPointsDeVie() 
+
+    @Override
+    public Armes GetSpecialeArme() 
+    {
+        return null;
+    }
+
+    @Override
+    public int GetPointsDeVie() 
     {
         return this.pointsDeVie;
     }
 
-    public int getNiveauExperience() 
+    @Override
+    public int GetNiveauExperience() 
     {
         return this.niveauExperience;
     }
-    
-    public ArrayList<String> getCompetences() 
+
+    @Override
+    public ArrayList<String> GetCompetences() 
     {
         return this.competences;
     }
-    
-    public ArrayList<String> getEquipement() 
+
+    @Override
+    public ArrayList<String> GetEquipement() 
     {
         return this.equipement;
     }
-    
-    public ArrayList<Armes> getArmes() 
+
+    @Override
+    public ArrayList<Armes> GetArmes() 
     {
         return this.armes;
     }
-    
-    public int getPositionX() 
+
+    @Override
+    public int GetPositionX() 
     {
         return this.positionX;
     }
-    
-    public int getPositionY()
+
+    @Override
+    public int GetPositionY()
     {
         return this.positionY;
     }
-    
-    public int getPointsAction() 
+
+    @Override
+    public int GetPointsAction() 
     {
         return this.pointsAction;
     }
-    
-    public String getPouvoir() 
+
+    @Override
+    public String GetCompetenceUnique() 
     {
         return this.competenceUnique;
     }
 
-    public String[] getInfo() 
+    @Override
+    public String[] GetInfo() 
     {
         String[] personnageInfo = new String[10];
         personnageInfo[0] = "nom: " + nom;
@@ -94,5 +111,10 @@ public class RobertMcCall
         personnageInfo[8] = "competencePassive: " + competencePassive;
         personnageInfo[9] = "Description: peut planifier sa stratégie, lui permettant de gagner 2 points d'action supplémentaires pour le tour suivant";
         return personnageInfo;
+    }
+    @Override
+    public String GetCompetencePassive() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetCompetencePassive'");
     }
 }

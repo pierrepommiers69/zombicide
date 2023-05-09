@@ -2,7 +2,7 @@ package com.mon.projet;
 
 import java.util.ArrayList;
 
-public class JCVD 
+public class JCVD extends Personnage
 {
     private String nom;
     private int pointsDeVie;
@@ -32,68 +32,75 @@ public class JCVD
         this.competenceUnique = "Acrobatie mortelle";
         this.SpecialArme = new Armes("Couteau de combat", 0, 30, "Lorsque Jean-Claude attaque avec son couteau de combat, il peut effectuer une attaque supplémentaire gratuite s'il a éliminé un ennemi avec la première attaque.");
         this.competencePassive = "Esquive";
-
     }
-    public String getNom() 
+    @Override
+    public String GetNom() 
     {
         return this.nom;
     }
-    public Armes getSpecialeArme() 
+
+    @Override
+    public Armes GetSpecialeArme() 
     {
         return this.SpecialArme;
     }
-    
-    public int getPointsDeVie() 
+
+    @Override
+    public int GetPointsDeVie() 
     {
         return this.pointsDeVie;
     }
-    public String getCompetencePassive() 
-    {
-        return this.competencePassive;
-    }
-    
-    public int getNiveauExperience() 
+
+    @Override
+    public int GetNiveauExperience() 
     {
         return this.niveauExperience;
     }
-    
-    public ArrayList<String> getCompetences() 
+
+    @Override
+    public ArrayList<String> GetCompetences() 
     {
         return this.competences;
     }
-    
-    public ArrayList<String> getEquipement() 
+
+    @Override
+    public ArrayList<String> GetEquipement() 
     {
         return this.equipement;
     }
-    
-    public ArrayList<Armes> getArmes() 
+
+    @Override
+    public ArrayList<Armes> GetArmes() 
     {
         return this.armes;
     }
-    
-    public int getPositionX() 
+
+    @Override
+    public int GetPositionX() 
     {
         return this.positionX;
     }
-    
-    public int getPositionY()
+
+    @Override
+    public int GetPositionY()
     {
         return this.positionY;
     }
-    
-    public int getPointsAction() 
+
+    @Override
+    public int GetPointsAction() 
     {
         return this.pointsAction;
     }
-    
-    public String getCompetenceUnique() 
+
+    @Override
+    public String GetCompetenceUnique() 
     {
         return this.competenceUnique;
     }
-    
 
-    public String[] getInfo() 
+    @Override
+    public String[] GetInfo()
     {
         String[] personnageInfo = new String[10];
         personnageInfo[0] = "nom: " + nom;
@@ -112,5 +119,10 @@ public class JCVD
         personnageInfo[8] = "competencePassive: " + competencePassive;
         personnageInfo[9] = "Description: peut esquiver l'attaque d'un enemi";
         return personnageInfo;
+    }
+    @Override
+    public String GetCompetencePassive() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetCompetencePassive'");
     }
 }

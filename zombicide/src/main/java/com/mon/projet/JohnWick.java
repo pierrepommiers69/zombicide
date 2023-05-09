@@ -2,7 +2,7 @@ package com.mon.projet;
 
 import java.util.ArrayList;
 
-public class JohnWick
+public class JohnWick extends Personnage
 {
     private String nom;
     private int pointsDeVie;
@@ -32,61 +32,74 @@ public class JohnWick
         this.SpecialArme = new Armes("Chien", 4, 0, "Le chien peut effectuer une recherche et faire du bruit");
 
     }
-    public String getNom() 
+    @Override
+    public String GetNom() 
     {
         return this.nom;
     }
-    public Armes getSpecialeArme() 
+
+    @Override
+    public Armes GetSpecialeArme() 
     {
         return this.SpecialArme;
     }
-    
-    public int getPointsDeVie() 
+
+    @Override
+    public int GetPointsDeVie() 
     {
         return this.pointsDeVie;
     }
-    
-    public int getNiveauExperience() 
+
+    @Override
+    public int GetNiveauExperience() 
     {
         return this.niveauExperience;
     }
-    
-    public ArrayList<String> getCompetences() 
+
+    @Override
+    public ArrayList<String> GetCompetences() 
     {
         return this.competences;
     }
-    
-    public ArrayList<String> getEquipement() 
+
+    @Override
+    public ArrayList<String> GetEquipement() 
     {
         return this.equipement;
     }
-    
-    public ArrayList<Armes> getArmes() 
+
+    @Override
+    public ArrayList<Armes> GetArmes() 
     {
         return this.armes;
     }
-    
-    public int getPositionX() 
+
+    @Override
+    public int GetPositionX() 
     {
         return this.positionX;
     }
-    
-    public int getPositionY()
+
+    @Override
+    public int GetPositionY()
     {
         return this.positionY;
     }
-    
-    public int getPointsAction() 
+
+    @Override
+    public int GetPointsAction() 
     {
         return this.pointsAction;
     }
-    
-    public String getCompetenceunique() 
+
+    @Override
+    public String GetCompetenceUnique() 
     {
         return this.competenceUnique;
     }
 
-    public String[] getInfo() 
+    @Override
+    public String[] GetInfo() 
     {
         String[] personnageInfo = new String[10];
         personnageInfo[0] = "nom: " + nom;
@@ -104,5 +117,10 @@ public class JohnWick
         personnageInfo[7] = "Description : peut continuer à agir même à 0 PV pour un tour supplémentaire et fais fuir les enemis avec moins de vie que lui";
 
         return personnageInfo;
+    }
+    @Override
+    public String GetCompetencePassive() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetCompetencePassive'");
     }
 }

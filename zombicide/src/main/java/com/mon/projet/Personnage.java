@@ -2,8 +2,9 @@ package com.mon.projet;
 
 import java.util.ArrayList;
 
-public  class Personnage 
+public  abstract class Personnage 
 {
+    
     private static final int JOHNWICK = 0;
     private static final int RAMBO = 1;
     private static final int McCALL = 2;
@@ -17,35 +18,52 @@ public  class Personnage
     private BruceLee bruceLee;
     private RAMBO rambo;
 
+    public abstract String GetNom();
+    public abstract Armes GetSpecialeArme();
+    public abstract int GetPointsDeVie();
+    public abstract String GetCompetencePassive();
+    public abstract int GetNiveauExperience();
+    public abstract ArrayList<String> GetCompetences();
+    public abstract ArrayList<String> GetEquipement();
+    public abstract ArrayList<Armes> GetArmes();
+    public abstract int GetPositionX(); 
+    public abstract int GetPositionY();
+    public abstract int GetPointsAction() ;
+    public abstract String GetCompetenceUnique();
+    public abstract String[] GetInfo(); 
+    
 
-    public Personnage()
+
+    public static Personnage[] PersonnageJouable()
     {
-        this.jcvd = new JCVD();
-        personnagesJouables[0]= this.jcvd.getNom();
-        this.robertMcCall = new RobertMcCall();
-        personnagesJouables[1]= this.robertMcCall.getNom();
-        this.rambo = new RAMBO();
-        personnagesJouables[2]= this.rambo.getNom();
-        this.bruceLee = new BruceLee();
-        personnagesJouables[3]= this.bruceLee.getNom();
-        this.johnWick = new JohnWick();
-        personnagesJouables[4] = this.johnWick.getNom();
+        Personnage[] personnagesJouables =  new Personnage[5];
+        JCVD jcvd = new JCVD();
+        personnagesJouables[0]= jcvd;
+        RobertMcCall robertMcCall = new RobertMcCall();
+        personnagesJouables[1]= robertMcCall;
+        RAMBO rambo = new RAMBO();
+        personnagesJouables[2]= rambo;
+        BruceLee bruceLee = new BruceLee();
+        personnagesJouables[3]= bruceLee;
+        JohnWick johnWick = new JohnWick();
+        personnagesJouables[4] = johnWick;
+        return personnagesJouables;
     }
     public int WhoPersonnage(String nom)
     {
-        if(nom.equals(this.bruceLee.getNom()))
+        if(nom.equals(this.bruceLee.GetNom()))
         {
            return  BRUCELEE;
         }
-        else if(nom.equals(this.johnWick.getNom()))
+        else if(nom.equals(this.johnWick.GetNom()))
         {
             return JOHNWICK;
         }
-        else if(nom.equals(this.rambo.getNom()))
+        else if(nom.equals(this.rambo.GetNom()))
         {
             return RAMBO;
         }
-        else if(nom.equals(this.robertMcCall.getNom()))
+        else if(nom.equals(this.robertMcCall.GetNom()))
         {
             return McCALL;
         }
@@ -63,12 +81,14 @@ public  class Personnage
     public ArrayList<String[]> GetInfoPerso()
     {
         ArrayList<String[]> persoInfos = new ArrayList<String[]>();
-        persoInfos.add(this.bruceLee.getInfo());
-        persoInfos.add(this.jcvd.getInfo());
-        persoInfos.add(this.johnWick.getInfo());
-        persoInfos.add(this.robertMcCall.getInfo());
-        persoInfos.add(this.rambo.getInfo());
+        persoInfos.add(this.bruceLee.GetInfo());
+        persoInfos.add(this.jcvd.GetInfo());
+        persoInfos.add(this.johnWick.GetInfo());
+        persoInfos.add(this.robertMcCall.GetInfo());
+        persoInfos.add(this.rambo.GetInfo());
         return persoInfos;
     }
+
+    
 
 }

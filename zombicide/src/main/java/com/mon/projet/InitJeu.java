@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class InitJeu extends Personnage
+public class InitJeu
 {
     public enum Difficulte 
     {
@@ -23,8 +23,7 @@ public class InitJeu extends Personnage
         this.nmbJoueur = nbJoueurs;
         this.nomPartie = nompartie;
         this.diff = difficulte;
-        this.listJoueur = new Personnage();
-        String[] persoJouable = this.listJoueur.GetPersonnageJouable();
+        Personnage[] persoJouable = Personnage.PersonnageJouable();
         System.out.println("Choisi ton joueur !");
 
         for(int i = 0; i<nbJoueurs; i++)
@@ -35,21 +34,25 @@ public class InitJeu extends Personnage
 
             for(int j = 0; j < persoJouable.length; j++)
             {
-                System.out.print(persoJouable[j] + " | ");
+                System.out.print(persoJouable[j].GetNom() + " | ");
             }
             System.out.println();
             System.out.println("Pour avoir plus d'info sur les personnages tapez : help");
             String nom = scanner.nextLine();
             if(nom.charAt(0) == 'h')
             {
-                ArrayList<String[]> infoPerso = listJoueur.GetInfoPerso();
-                for (int j = 0; j < infoPerso.size(); j++)
+                System.out.println();
+
+
+                for (int j = 0; j < persoJouable.length; j++)
                 {
-                    for (String info : infoPerso.get(j)) 
+                    String[] infoJoueur = persoJouable[j].GetInfo();
+                    for(int h = 0; h<infoJoueur.length; h++)
                     {
-                        System.out.println(info);
+                        
+                        System.out.println(infoJoueur[h]);
                     }
-                    System.out.println();
+                    System.out.println("------------------------------------------");
                     System.out.println();
 
                 }

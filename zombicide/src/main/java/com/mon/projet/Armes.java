@@ -7,7 +7,7 @@ public class Armes
    private int degats;
    private String regleSpeciale;
 
-   public Armes(String nom, int portee, int degats, String regleSpeciale)
+   public Armes(String nom, int portee, int degats, String regleSpeciale) 
    {
       this.nom = nom;
       this.portee = portee;

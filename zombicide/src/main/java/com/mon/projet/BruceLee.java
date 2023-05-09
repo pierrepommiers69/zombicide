@@ -1,7 +1,7 @@
 package com.mon.projet;
 import java.util.ArrayList;
 
-public class BruceLee 
+public class BruceLee extends Personnage
 {
     private String nom;
     private int pointsDeVie;
@@ -33,62 +33,75 @@ public class BruceLee
                                                                         " il peut effectuer une deuxième attaque sur un autre ennemi"
                                                                         +"adjacent sans coût supplémentaire en points d'action.");
     }
-
-    public String getNom() 
+    
+    @Override
+    public String GetNom() 
     {
         return this.nom;
     }
-    public Armes getSpecialeArme() 
+
+    @Override
+    public Armes GetSpecialeArme() 
     {
         return this.SpecialArme;
     }
-    
-    public int getPointsDeVie() 
+
+    @Override
+    public int GetPointsDeVie() 
     {
         return this.pointsDeVie;
     }
-    
-    public int getNiveauExperience() 
+
+    @Override
+    public int GetNiveauExperience() 
     {
         return this.niveauExperience;
     }
-    
-    public ArrayList<String> getCompetences() 
+
+    @Override
+    public ArrayList<String> GetCompetences() 
     {
         return this.competences;
     }
-    
-    public ArrayList<String> getEquipement() 
+
+    @Override
+    public ArrayList<String> GetEquipement() 
     {
         return this.equipement;
     }
-    
-    public ArrayList<Armes> getArmes() 
+
+    @Override
+    public ArrayList<Armes> GetArmes() 
     {
         return this.armes;
     }
-    
-    public int getPositionX() 
+
+    @Override
+    public int GetPositionX() 
     {
         return this.positionX;
     }
-    
-    public int getPositionY()
+
+    @Override
+    public int GetPositionY()
     {
         return this.positionY;
     }
-    
-    public int getPointsAction() 
+
+    @Override
+    public int GetPointsAction() 
     {
         return this.pointsAction;
     }
-    
-    public String getPouvoir() 
+
+    @Override
+    public String GetCompetenceUnique() 
     {
         return this.competenceUnique;
     }
 
-    public String[] getInfo() 
+    @Override
+    public String[] GetInfo() 
     {
         String[] personnageInfo = new String[10];
         personnageInfo[0] = "nom: " + nom;
@@ -107,6 +120,12 @@ public class BruceLee
         personnageInfo[8] = "competencePassive: " + competencePassive;
         personnageInfo[9] = "Description: récupère 1 PV à chaque fois qu'il élimine un ennemi";
         return personnageInfo;
+    }
+
+    @Override
+    public String GetCompetencePassive() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetCompetencePassive'");
     }
     
 }
