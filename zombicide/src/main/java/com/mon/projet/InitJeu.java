@@ -11,12 +11,14 @@ public class InitJeu
         NORMAL,
         FACILE;
     }
-    public int nmbJoueur;
-    public String nomPartie;
-    public String diff;
-    public Personnage listJoueur;
+    private int nmbJoueur;
+    private String nomPartie;
+    private String diff;
+    private Personnage listJoueur;
+    private Plateau plateau;
+    
 
-    public InitJeu(String nompartie,int nbJoueurs, String difficulte)
+    public InitJeu(String nompartie,int nbJoueurs, String difficulte, Plateau plateau)
     {
 
         Scanner scanner = new Scanner(System.in);
@@ -56,8 +58,10 @@ public class InitJeu
                     System.out.println();
 
                 }
-            }
-            
+            }  
         }
+
+        //plateau.getPlateau()[]
+        
     }
 }
