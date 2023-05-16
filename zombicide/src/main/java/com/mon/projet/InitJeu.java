@@ -1,5 +1,4 @@
 package com.mon.projet;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -45,7 +44,6 @@ public class InitJeu
             {
                 System.out.println();
 
-
                 for (int j = 0; j < persoJouable.length; j++)
                 {
                     String[] infoJoueur = persoJouable[j].GetInfo();
@@ -56,12 +54,13 @@ public class InitJeu
                     }
                     System.out.println("------------------------------------------");
                     System.out.println();
-
                 }
-            }  
-        }
-
-        //plateau.getPlateau()[]
-        
+            }
+            System.out.println("Choisissez votre perso : ");
+            String choix = scanner.nextLine();  
+            Personnage perso = Personnage.WhoPersonnage(choix);
+            System.out.println("Vous avez choisis "+ perso.GetNom());
+            plateau.GetCase(0).GetListSurvivant().add(perso);
+        }        
     }
 }

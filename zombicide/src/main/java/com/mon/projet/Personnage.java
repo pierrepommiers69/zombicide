@@ -12,11 +12,11 @@ public  abstract class Personnage
     private static final int JCVD = 4;
 
     private static String[] personnagesJouables = new String[5];
-    private JohnWick johnWick;
-    private JCVD jcvd;
-    private RobertMcCall robertMcCall;
-    private BruceLee bruceLee;
-    private RAMBO rambo;
+    private static JohnWick johnWick = new JohnWick();
+    private static JCVD jcvd = new JCVD();
+    private static RobertMcCall robertMcCall = new RobertMcCall();
+    private static BruceLee bruceLee = new BruceLee();
+    private static RAMBO rambo = new RAMBO();
 
     public abstract String GetNom();
     public abstract Armes GetSpecialeArme();
@@ -49,27 +49,27 @@ public  abstract class Personnage
         personnagesJouables[4] = johnWick;
         return personnagesJouables;
     }
-    public int WhoPersonnage(String nom)
+    public static Personnage WhoPersonnage(String nom)
     {
-        if(nom.equals(this.bruceLee.GetNom()))
+        if(nom.equals(bruceLee.GetNom()))
         {
-           return  BRUCELEE;
+           return bruceLee;
         }
-        else if(nom.equals(this.johnWick.GetNom()))
+        else if(nom.equals(johnWick.GetNom()))
         {
-            return JOHNWICK;
+            return johnWick;
         }
-        else if(nom.equals(this.rambo.GetNom()))
+        else if(nom.equals(rambo.GetNom()))
         {
-            return RAMBO;
+            return rambo;
         }
-        else if(nom.equals(this.robertMcCall.GetNom()))
+        else if(nom.equals(robertMcCall.GetNom()))
         {
-            return McCALL;
+            return robertMcCall;
         }
         else
         {
-            return JCVD;
+            return jcvd;
         }
     }
 

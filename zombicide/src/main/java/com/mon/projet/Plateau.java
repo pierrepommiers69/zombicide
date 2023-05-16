@@ -26,22 +26,22 @@ public class Plateau
         {
             if(differentCase[i] == 0)
             {
-                Cases caseSombre = new Cases( cols, ligs, 0, Random(10), 0, 1, Enum.FONCTIONCASE.SOMBRE);
+                Cases caseSombre = new Cases(i ,  cols, ligs, 0, Random(10), 0, 1, Enum.FONCTIONCASE.SOMBRE);
                 plateau[i] = caseSombre;
             }
             if(differentCase[i] == 1)
             {
-                Cases caseClaire = new Cases(cols, ligs, 0, Random(10), 0, 0, Enum.FONCTIONCASE.CLAIR);
+                Cases caseClaire = new Cases(i,cols, ligs, 0, Random(10), 0, 0, Enum.FONCTIONCASE.CLAIR);
                 plateau[i] = caseClaire;
             }
             if(differentCase[i] == 2)
             {
-                Cases caseObstacle = new Cases(cols, ligs, 0, 0, 0, 0, Enum.FONCTIONCASE.OBSTACLE);
+                Cases caseObstacle = new Cases(i,cols, ligs, 0, 0, 0, 0, Enum.FONCTIONCASE.OBSTACLE);
                 plateau[i] = caseObstacle;
             }
             if(differentCase[i] == 3)
             {
-                Cases caseSortie= new Cases(cols, ligs, 0, 0, 0, 0, Enum.FONCTIONCASE.SORTIE);
+                Cases caseSortie= new Cases(i,cols, ligs, 0, 0, 0, 0, Enum.FONCTIONCASE.SORTIE);
                 plateau[i] = caseSortie;
             }
 
@@ -73,6 +73,21 @@ public class Plateau
         System.out.println("pas de case claire trouvé");
         return null;
     }
+
+    public Cases GetCase(int id)
+    {
+        for(int i = 0; i<this.taille; i++)
+        {
+            if(this.plateau[i].getID() == id)
+            {
+                return plateau[i];
+            }
+        }
+        System.out.println("pas de case  trouvé");
+        return null;
+    }
+
+
 
     public static int Random(int intervalle)
     {

@@ -17,8 +17,9 @@ public class Cases
     private ArrayList<Cases> voisin = new ArrayList<Cases>();
     private int cols;
     private int ligs;
+    private int id;
     
-    public Cases(int cols, int ligs, int nbBruits, float chance, int nombreSurvivant, int nombreZombie, Enum.FONCTIONCASE fonctionCase)
+    public Cases(int id, int cols, int ligs, int nbBruits, float chance, int nombreSurvivant, int nombreZombie, Enum.FONCTIONCASE fonctionCase)
     {
         this.cols = cols;
         this.ligs = ligs;
@@ -40,7 +41,9 @@ public class Cases
                 Zombie zombie = new Zombie(100, 5, 2, Enum.ZOMBIE.RODEUR);
                 listeZombie.add(zombie);
             }
-        }      
+        }  
+        
+        this.id = id;
         
     }
 
@@ -50,6 +53,10 @@ public class Cases
     
 
 //Getters et Setters
+    public int getID()  
+	{
+	    return this.id;
+	}
 	public int getNbBruits()  
 	{
 	    return nbBruits;
