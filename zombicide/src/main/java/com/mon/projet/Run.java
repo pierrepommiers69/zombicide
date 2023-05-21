@@ -4,6 +4,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mon.projet.Items.Enums;
+import com.mon.projet.PlateauZombicide.Plateau;
+import com.mon.projet.Tools.Couple;
+
 
 public class Run 
 {
@@ -20,7 +24,6 @@ public class Run
 		Plateau newPaPlateau = new Plateau(plateauTest,block, 10, 10);
 		Scanner scanner = new Scanner(System.in);
 		int verifyNmbJoueur = 0;
-		InitJeu newJeu = null;
 		System.out.println("entrer une nom de partie");
 		String nomPartie = scanner.nextLine();
 		System.out.println("entrer un nombre de joueur");
@@ -38,7 +41,7 @@ public class Run
 			System.out.println("nombre de joueur, 2-6");
 			String inputString = scanner.nextLine();
 			verifyNmbJoueur = 1;
-			newJeu = new InitJeu(nomPartie, 5, difficulte, newPaPlateau);
+			Jeu newJeu = new Jeu(5, plateauTest, block, Enums.Difficulte.Facile);
 		}
 	}
 	

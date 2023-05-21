@@ -1,5 +1,6 @@
 package com.mon.projet;
 
+import com.mon.projet.Items.Enums;
 
 public class Zombie 
 {
@@ -7,9 +8,9 @@ public class Zombie
     private int pointsDeVie;
     private int puissance;
     private int deplacementZombie;
-    private Enum.ZOMBIE typeZombie;
+    private Enums.ZOMBIE typeZombie;
     
-    public Zombie (int pointsDeVie, int puissance, int deplacementZombie,  Enum.ZOMBIE typeZombie)
+    public Zombie (int pointsDeVie, int puissance, int deplacementZombie,  Enums.ZOMBIE typeZombie)
     {
         this.pointsDeVie =pointsDeVie;
         this.puissance=puissance;
@@ -53,13 +54,15 @@ public class Zombie
         this.deplacementZombie = deplacementZombie;
     }
 
-    public Enum.ZOMBIE getTypeZombie() 
+    public Enums.ZOMBIE getTypeZombie() 
     {
         return typeZombie;
     }
 
-    public void setTypeZombie(Enum.ZOMBIE typeZombie) 
+    public void setTypeZombie(Enums.ZOMBIE typeZombie) 
     {
         this.typeZombie = typeZombie;
-    }     
+    }
+    
+    
 }
