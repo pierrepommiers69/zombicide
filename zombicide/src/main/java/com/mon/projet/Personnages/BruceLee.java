@@ -25,7 +25,7 @@ public class BruceLee extends Personnage
         this.nom = "BruceLee (Le Dragon)";
         this.pointsDeVie = 80;
         this.niveauExperience = 12;
-        this.idCases = 0;
+        this.idCases = 99;
         this.pointsAction = 4;
         this.competenceUnique = "Énergie du dragon";
         this.competencePassive = "Maîtrise du chi";

@@ -26,7 +26,7 @@ public class RAMBO extends Personnage
         this.nom = "RAMBO";
         this.pointsDeVie = 100;
         this.niveauExperience = 14;
-        this.idCases = 0;
+        this.idCases = 99;
         this.pointsAction = 3;
         this.competenceUnique = "Guérilla";
         this.SpecialArme = new Armes("Arbalète explosive", 1, 30, "Dégats de zones", Enums.Rarity.LENGENDAIRE, 6,1);

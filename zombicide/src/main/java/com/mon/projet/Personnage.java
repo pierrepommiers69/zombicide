@@ -16,6 +16,7 @@ import com.mon.projet.Personnages.RobertMcCall;
 import com.mon.projet.PlateauZombicide.Cases;
 import com.mon.projet.PlateauZombicide.Plateau;
 import com.mon.projet.Tools.Couple;
+import com.mon.projet.Tools.CoupleObjets;
 
 public abstract class Personnage 
 {
@@ -108,6 +109,34 @@ public abstract class Personnage
         return persoInfos;
     }
 
+    public void GetAllInfoPerso()
+    {
+        System.out.println("NOM : " + this.GetNom());
+        System.out.println("PV : " +  + this.GetPointsDeVie());
+        System.out.println("Position : " +  this.GetPosition());
+        String[] infoArmes;
+        System.out.println("Armes : ");
+        for (int i = 0; i < this.GetArmes().size(); i++)
+        {
+            infoArmes = this.GetArmes().get(i).getInfoArme(); 
+            for (int j = 0; j < infoArmes.length; j++)
+            {
+                System.out.println(infoArmes[j]);
+            }   
+        }
+        System.out.println("Objets : ");
+        String[] infoEquipement;
+        for (int i = 0; i < this.GetEquipement().size(); i++)
+        {
+            infoEquipement = this.GetEquipement().get(i).getInfoEquipement(); 
+            for (int j = 0; j < infoEquipement.length; j++)
+            {
+                System.out.println(infoEquipement[j]);
+            }   
+        }     
+
+    }
+
     public int LanceDe()
     { 
         Random random = new Random();
@@ -188,7 +217,7 @@ public abstract class Personnage
 
         return armes;
     }
-    public void Recherche(Plateau plateau)
+    public CoupleObjets Recherche(Plateau plateau)
     {
         Cases myCases = plateau.GetCase(this.GetPosition());
         Enums.FONCTIONCASE myCaseType = myCases.GetMonType();
@@ -238,8 +267,15 @@ public abstract class Personnage
             }            
         }
         myCases.setNbBruits(myCases.getNbBruits()+2);
-        this.GetArmes().add(newArmes);
-        this.GetEquipement().add(objets);
+        if(newArmes != null)
+        {   
+            this.GetArmes().add(newArmes);
+        }
+        if(objets != null)
+        {
+            this.GetEquipement().add(objets);
+        }
+        return new CoupleObjets(newArmes, objets);
     }
 
     public void Attaque(Armes armes, Plateau plateau, Cases caseXY, int chance)
@@ -294,10 +330,12 @@ public abstract class Personnage
     public void Game(Plateau plateau)
     {
         System.out.println("Lancez le dé");
-        int nmbAction = LanceDe();
-        System.out.println("Vous avez" + nmbAction + " Actions possible");
+        int nmbAction = LanceDe()+1;
+        System.out.println("Vous avez " + nmbAction + " Actions possible");
         while(nmbAction > 0)
         {
+            GetAllInfoPerso();
+            
             System.out.println("Choisissez votre action");
             System.out.println("Vous pouvez :");
             System.out.println("    - Deplacer, coûte 1 Action");
@@ -309,24 +347,27 @@ public abstract class Personnage
             Scanner scanner = new Scanner(System.in);
             String action = scanner.nextLine();
 
-            if(action.charAt(0) == 'D')
+            if( nmbAction >= 1 && action.charAt(0) == 'D')
             {
+                 
                 boolean coorectDeplacement = true;
                 while(coorectDeplacement)
                 {
+                    
                     System.out.println("Vous avez choisis de vous deplacer");
                     System.out.println("Ou voulez vous, vous deplacer ?");
                     System.out.println("Vous pouvez vous deplacer : ");
+                    plateau.PrintPlateau();
                     ArrayList<Integer> deplacement = new ArrayList<Integer>();
                     for (int i = 0; i < plateau.GetCase(this.GetPosition()).GetVoisin().size(); i++)
                     {
-                        System.out.print(plateau.GetCase(this.GetPosition()).GetVoisin().get(i).GetMonType());
-                        System.out.println("Type : " + i);
+                        System.out.print(plateau.GetCase(this.GetPosition()).GetVoisin().get(i).getID());
+                        System.out.println("numero : " + i);
                         deplacement.add(plateau.GetCase(this.GetPosition()).GetVoisin().get(i).getID());
                     }
                     System.out.println("Votre choix  : ");
                     String choix = scanner.nextLine();
-                    boolean done = Deplacement(plateau, plateau.GetCase(Integer.parseInt(choix)));
+                    boolean done = Deplacement(plateau, plateau.GetCase(deplacement.get(Integer.parseInt(choix))));
                     if(done)
                     {
                         System.out.println("Bravo! ");
@@ -339,29 +380,38 @@ public abstract class Personnage
                 }
                 nmbAction--;
             }
-            else if(action.charAt(0) == 'R')
+            else if(nmbAction >= 2 && action.charAt(0) == 'R')
             {
+
                 System.out.println("Vous avez choisis de Rechercher");
-                Recherche(plateau);
+                CoupleObjets coupleRecherche = Recherche(plateau);
                 nmbAction-=2;
-                if(this.GetArmes().size() != 0)
+                if(coupleRecherche.getFirst() != null)
                 {
-                    String[] info = this.GetArmes().get(this.GetArmes().size()-1).getInfoArme();
+                    String[] info = coupleRecherche.getFirst().getInfoArme();
                     for (int i = 0; i < info.length; i++) 
                     {
                         System.out.println(info[i]);                        
                     }
                 }
-                if(this.GetEquipement().size() != 0)
+                else
                 {
-                    String[] info = this.GetEquipement().get(this.GetEquipement().size()-1).getInfoEquipement();
+                    System.out.println("Pas d'armes trouvées !!");
+                }
+                if(coupleRecherche.getSecond() != null)
+                {
+                    String[] info = coupleRecherche.getSecond().getInfoEquipement();
                     for (int i = 0; i < info.length; i++) 
                     {
                         System.out.println(info[i]);                        
                     }
-                } 
+                }
+                else
+                {
+                    System.out.println("Pas d'objets trouvées !!");
+                }
             }
-            else if(action.charAt(0) == 'A')
+            else if(this.GetArmes().size() > 0 && nmbAction >= 2 && action.charAt(0) == 'A')
             {
                 System.out.println("Vous avez choisis d attaquer");
                 System.out.println("Choisissez votre arme");
@@ -378,7 +428,7 @@ public abstract class Personnage
                 Attaque(this.GetArmes().get(Integer.parseInt(choix)), plateau, null, nmbAction);
                 nmbAction-=2;
             }
-            else
+            else if(nmbAction >= 1 && this.GetEquipement().size() > 0)
             {
                 System.out.println("Vous avez choisis d equiper");
                 System.out.println("Choisissez votre Equipement");
@@ -389,8 +439,9 @@ public abstract class Personnage
                     {
                         System.out.println(info[j]);
                     }
+                    System.out.println("numero : " + i);
                 }
-                System.out.println("Votre choix  : ");
+                System.out.println("Votre choix (entrez le numéro) : ");
                 String choix = scanner.nextLine();
                 String choix2 = "";
                 if(this.GetEquipement().get(Integer.parseInt(choix)).GetMyType() != Enums.Objets.SANTE)
@@ -403,8 +454,9 @@ public abstract class Personnage
                         {
                             System.out.println(info[j]);
                         }
+                        System.out.println("numero : " + i);
                     }
-                    System.out.println("Votre choix  : ");
+                    System.out.println("Votre choix (entrez le numéro) : ");
                     choix2 = scanner.nextLine();
                 }
                 Equipement(this.GetEquipement().get(Integer.parseInt(choix)), this.GetArmes().get(Integer.parseInt(choix2)));

@@ -27,7 +27,7 @@ public class JCVD extends Personnage
         this.nom = "Jean Claude Vendame(=JCDV pour les intimes)";
         this.pointsDeVie = 80;
         this.niveauExperience = 12;
-        this.idCases = 0;
+        this.idCases = 99;
         this.pointsAction = 4;
         this.competenceUnique = "Acrobatie mortelle";
         this.SpecialArme = new Armes("Couteau de combat", 0, 30, 

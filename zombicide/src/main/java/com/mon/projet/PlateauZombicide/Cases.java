@@ -110,30 +110,31 @@ public class Cases
         }
         else if(x == this.cols-1 && y == 0)
         {
-            this.voisin.add(plateau[x*this.cols+y+1]);
-            this.voisin.add(plateau[(x-1)*this.cols+y+1]);
-            this.voisin.add(plateau[(x-1)*this.cols+y]);
+            this.voisin.add(plateau[y*this.cols+x-1]);
+            this.voisin.add(plateau[(y+1)*this.cols+x-1]);
+            this.voisin.add(plateau[(y+1)*this.cols+x]);
         }
         else if(x == 0 && y == this.ligs-1)
         {
-            this.voisin.add(plateau[x*this.cols+y-1]);
-            this.voisin.add(plateau[(x+1)*this.cols+y]);
-            this.voisin.add(plateau[(x+1)*this.cols+y-1]);            
+            this.voisin.add(plateau[(y-1)*this.cols+x]);
+            this.voisin.add(plateau[(y-1)*this.cols+x+1]);
+            this.voisin.add(plateau[(y)*this.cols+x+1]);            
         }
         else
         {
-            this.voisin.add(plateau[x*this.cols+y-1]);
-            this.voisin.add(plateau[(x-1)*this.cols+y]);
-            this.voisin.add(plateau[(x-1)*this.cols+y-1]);            
+            this.voisin.add(plateau[y*this.cols+x-1]);
+            this.voisin.add(plateau[(y-1)*this.cols+x]);
+            this.voisin.add(plateau[(y-1)*this.cols+x-1]);            
         }
     }
 
-    private boolean isBlockVoisin(int x, int y, ArrayList<Couple> block)
+    private boolean isBlockVoisin(int y, int x, ArrayList<Couple> block)
     {
+        int idVoisin = y*10+x;
         boolean result = false;
         for (int i = 0; i < block.size(); i++)
         {
-            if(x == block.get(i).getFirst() && y == block.get(i).getSecond())
+            if(this.id == block.get(i).getFirst() && idVoisin == block.get(i).getSecond())
             {
                 result = true;
                 break;
@@ -148,36 +149,36 @@ public class Cases
         if(x == 0)
         {
             //format += days < 10 ?  "0"+days+"/" : days+"/"
-            boolean _0 = isBlockVoisin(x, y-1, block) ?  this.voisin.add(plateau[(x)*this.cols+y-1]) : false;
-            boolean _1 = isBlockVoisin(x, y+1, block) ?  this.voisin.add(plateau[(x)*this.cols+y+1]) : false;
-            boolean _2 = isBlockVoisin(x-1, y+1, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y+1]) : false;
-            boolean _3 = isBlockVoisin(x+1, y, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y]) : false;
-            boolean _4 = isBlockVoisin(x+1, y+1, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y+1]) : false;
+            boolean _0 = !isBlockVoisin(y-1, x, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x]) : false;
+            boolean _1 = !isBlockVoisin(y-1, x+1, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x+1]) : false;
+            boolean _2 = !isBlockVoisin(y, x+1, block) ?  this.voisin.add(plateau[(y)*this.cols+x+1]) : false;
+            boolean _3 = !isBlockVoisin(y+1, x, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x]) : false;
+            boolean _4 = !isBlockVoisin(y+1, x+1, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x+1]) : false;
         }
         else if(x == this.cols-1)
         {
-            boolean _0 = isBlockVoisin(x-1, y-1, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y-1]) : false;
-            boolean _1 = isBlockVoisin(x, y+1, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y+1]) : false;
-            boolean _2 = isBlockVoisin(x-1, y, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y]) : false;
-            boolean _3 = isBlockVoisin(x-1, y-1, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y-1]) : false;
-            boolean _4 = isBlockVoisin(x-1, y+1, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y+1]) : false;
+            boolean _0 = !isBlockVoisin(y-1, x, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x]) : false;
+            boolean _1 = !isBlockVoisin(y-1, x-1, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x-1]) : false;
+            boolean _2 = !isBlockVoisin(y, x-1, block) ?  this.voisin.add(plateau[(y)*this.cols+x-1]) : false;
+            boolean _3 = !isBlockVoisin(y+1, x-1, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x-1]) : false;
+            boolean _4 = !isBlockVoisin(y+1, x, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x]) : false;
         }
         else if(y == this.ligs-1)
         {
-            boolean _0 = isBlockVoisin(x-1, y, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y]) : false;
-            boolean _1 = isBlockVoisin(x+1, y, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y]) : false;
-            boolean _2 = isBlockVoisin(x, y-1, block) ?  this.voisin.add(plateau[(x)*this.cols+y-1]) : false;
-            boolean _3 = isBlockVoisin(x-1, y-1, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y-1]) : false;
-            boolean _4 = isBlockVoisin(x+1, y-1, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y-1]) : false;            
+            boolean _0 = !isBlockVoisin(y-1, x-1, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x-1]) : false;
+            boolean _1 = !isBlockVoisin(y-1, x, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x]) : false;
+            boolean _2 = !isBlockVoisin(y-1, x+1, block) ?  this.voisin.add(plateau[(y-1)*this.cols+x+1]) : false;
+            boolean _3 = !isBlockVoisin(y, x-1, block) ?  this.voisin.add(plateau[(y)*this.cols+x-1]) : false;
+            boolean _4 = !isBlockVoisin(y, x+1, block) ?  this.voisin.add(plateau[(y)*this.cols+x+1]) : false;            
         }
         else
         {
  
-            boolean _0 =  !isBlockVoisin(x-1, y, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y]) : false;
-            boolean _1 = !isBlockVoisin(x+1, y, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y]) : false;
-            boolean _2 = !isBlockVoisin(x-1, y+1, block) ?  this.voisin.add(plateau[(x-1)*this.cols+y+1]) : false;
-            boolean _3 = !isBlockVoisin(x+1, y+1, block) ?  this.voisin.add(plateau[(x+1)*this.cols+y+1]) : false;
-            boolean _4 = !isBlockVoisin(x, y+1, block) ?  this.voisin.add(plateau[x*this.cols+y+1]) : false;            
+            boolean _0 =  !isBlockVoisin(y, x+1, block) ?  this.voisin.add(plateau[(y)*this.cols+x+1]) : false;
+            boolean _1 = !isBlockVoisin(y, x-1, block) ?  this.voisin.add(plateau[(y)*this.cols+x-1]) : false;
+            boolean _2 = !isBlockVoisin(y+1, x-1, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x-1]) : false;
+            boolean _3 = !isBlockVoisin(y+1, x, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x]) : false;
+            boolean _4 = !isBlockVoisin(y+1, x+1, block) ?  this.voisin.add(plateau[(y+1)*this.cols+x+1]) : false;            
         }
     }
 
@@ -202,9 +203,12 @@ public class Cases
             int[] tabOfVoisinPourY = {-1,-1,-1,0,0,1,1,1};
             for (int i = 0; i < tabOfVoisinPourY.length; i++)
             {
-                boolean _0 = isBlockVoisin(x + tabOfVoisinPourX[i], y + tabOfVoisinPourY[i], block) ?  
-                                this.voisin.add(plateau[(x+ tabOfVoisinPourX[i])*this.cols+y + tabOfVoisinPourY[i]]) : false;
+                boolean _0 = !isBlockVoisin(y + tabOfVoisinPourX[i], x + tabOfVoisinPourY[i], block) ?  
+                                this.voisin.add(plateau[(y+ tabOfVoisinPourX[i])*this.cols+x + tabOfVoisinPourY[i]]) : false;
             }
+        }
+        for (int index = 0; index < this.voisin.size(); index++) {
+            System.out.println(voisin.get(index).getID());
         }
     }
 }

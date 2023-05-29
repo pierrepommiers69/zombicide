@@ -25,7 +25,7 @@ public class JohnWick extends Personnage
         this.nom = "JohnWick (Croquemitaine)";
         this.pointsDeVie = 75;
         this.niveauExperience = 5;
-        this.idCases = 0;
+        this.idCases = 99;
         this.pointsAction = 5;
         this.competenceUnique = "Légende Vivante";
         this.SpecialArme = new Armes("Chien", 4, 0, "Le chien peut effectuer une recherche et faire du bruit",  Enums.Rarity.LENGENDAIRE, 6,1);

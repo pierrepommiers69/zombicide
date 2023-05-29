@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.mon.projet.Items.Enums;
 import com.mon.projet.PlateauZombicide.Cases;
 import com.mon.projet.PlateauZombicide.Plateau;
+import com.mon.projet.Tools.Chemin;
 import com.mon.projet.Tools.Couple;
 
 public class Jeu
@@ -22,6 +23,7 @@ public class Jeu
     {
         this.nmbJoueur = nmbJoueur;
         this.plateau = InitJeu(nmbJoueur, plateauTest, block);
+
         this.difficulte = difficulte;
         this.generationCasesSombre = GiveHardness();
         LanceMainLoop();
@@ -49,9 +51,9 @@ public class Jeu
     public  Plateau InitJeu(int nbJoueurs, int[] plateauTest, ArrayList<Couple> block)
     {
         Plateau newPlateau = new Plateau(plateauTest,block, 10, 10);
+        ArrayList<Cases> cases = Chemin.Djisktra(newPlateau.GetCase(75), newPlateau, newPlateau.GetCase(99));
         Scanner scanner = new Scanner(System.in);
         Personnage[] persoJouable = Personnage.PersonnageJouable();
-        System.out.println("Choisi ton joueur !");
 
         for(int i = 0; i<nbJoueurs; i++)
         {
@@ -66,7 +68,7 @@ public class Jeu
             System.out.println();
             System.out.println("Pour avoir plus d'info sur les personnages tapez : help");
             String nom = scanner.nextLine();
-            if(nom.charAt(0) == 'h')
+            if(nom.length() > 0 && nom.charAt(0) == 'h')
             {
                 System.out.println();
 
@@ -92,7 +94,7 @@ public class Jeu
             {
                 Personnage perso = Personnage.WhoPersonnage(nom);
                 System.out.println("Vous avez choisis "+ perso.GetNom());
-                newPlateau.GetCase(0).GetListSurvivant().add(perso);
+                newPlateau.GetCase(99).GetListSurvivant().add(perso);
                 this.personnages.add(perso);
             }
             
@@ -102,8 +104,12 @@ public class Jeu
 
     public void LanceMainLoop()
     {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
         while(this.personnages.size()>0)
         {
+            
             for (int index = 0; index < this.plateau.getPlateau().length; index++)
             {
                 Cases cases = this.plateau.getPlateau()[index];
@@ -112,6 +118,8 @@ public class Jeu
 
             for (int i = 0; i < this.personnages.size(); i++)
             {
+                
+                System.out.println("PERSONNAGE : " + this.personnages.get(i).GetNom());
                 this.personnages.get(i).Game(plateau);
             }
             
@@ -119,7 +127,7 @@ public class Jeu
             {
                 this.zombies.get(i).Game(plateau, plateau.GetplusBruit());
             }
-            
+
             int indexZombie = 0;
 
             for(int i = 0; i<plateau.getPlateau().length; i++)
@@ -131,11 +139,13 @@ public class Jeu
                     {
                         Zombie zombie = new Zombie(200, 15, 1,Enums.ZOMBIE.MOLOSSE, i, indexZombie);
                         plateau.getPlateau()[i].getListeZombie().add(zombie);
+                        zombies.add(zombie);
                     }
                     else
                     {
                         Zombie zombie = new Zombie(100, 10, 2, Enums.ZOMBIE.RODEUR, i, indexZombie);
                         plateau.getPlateau()[i].getListeZombie().add(zombie);
+                        zombies.add(zombie);
                     }
                     indexZombie++;
                 }                
@@ -154,7 +164,10 @@ public class Jeu
             {
                 Cases casesTransformation = plateau.GetHasardCase();
                 casesTransformation.setMonType(Enums.FONCTIONCASE.SOMBRE);    
-            }            
+            } 
+            
+            plateau.PrintPlateauZombie();
+            plateau.PrintPlateau();
         }        
     }
 }

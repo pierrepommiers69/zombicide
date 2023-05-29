@@ -19,10 +19,10 @@ public class Chemin
             {
                 for (int i = 0; i < traiter.get(index).size(); i++)
                 {
-                    if(mini> traiter.get(index).get(i).getFirst())
+                    if(mini> traiter.get(index).get(i).getSecond())
                     {
                         couple = new Couple(index, i);
-                        mini = traiter.get(index).get(i).getFirst();
+                        mini = traiter.get(index).get(i).getSecond();
                     }
                 }
             }
@@ -39,10 +39,10 @@ public class Chemin
         for (int index = 0; index < traiter.size(); index++)
         {
             
-            if(mini> traiter.get(index).getFirst())
+            if(mini> traiter.get(index).getSecond())
             {
                 couple = traiter.get(index);
-                mini = traiter.get(index).getFirst();
+                mini = traiter.get(index).getSecond();
             }
                         
         }
@@ -52,7 +52,7 @@ public class Chemin
     public static final ArrayList<Cases> Djisktra(Cases start,  Plateau plateau, Cases end)
     {
         ArrayList<Cases> cheminRapide = new ArrayList<Cases>();
-        cheminRapide.add(cheminRapide.size()-1, end);
+        cheminRapide.add(end);
         boolean[] seen = new boolean[plateau.getPlateau().length];
         for (int i = 0; i < seen.length; i++)
         {
@@ -66,15 +66,16 @@ public class Chemin
             allChemin.add(newCouple);            
         }
 
-        Couple couplegenesis = new Couple(start.getID(), 0);
-        allChemin.get(0).add(couplegenesis);
+        Couple couplegenesis = new Couple(start.getID() , 0 );
+        allChemin.get(start.getID()).add(couplegenesis);
         int indexSeen = seen.length; 
         Couple indexCoupleFind = plusPetitChemin(allChemin, seen);
-        while(indexSeen > 0 && plateau.GetCase(indexCoupleFind.getFirst()).getID() != end.getID())
+        while(indexSeen > 0 && indexCoupleFind.getFirst() != end.getID())
         {
             for (int i = 0; i < plateau.GetCase(indexCoupleFind.getFirst()).GetVoisin().size(); i++)
             {
-                Couple voisin = new Couple(indexCoupleFind.getFirst(), couplegenesis.getFirst()+1);
+                int poidsChemin = couplegenesis.getSecond() + 1;
+                Couple voisin = new Couple(indexCoupleFind.getFirst(), poidsChemin);
                 if(seen[plateau.GetCase(indexCoupleFind.getFirst()).GetVoisin().get(i).getID()] == false)
                 {
                     allChemin.get(plateau.GetCase(indexCoupleFind.getFirst()).GetVoisin().get(i).getID()).add(voisin);
@@ -85,19 +86,16 @@ public class Chemin
             indexCoupleFind = plusPetitChemin(allChemin, seen);
             couplegenesis = allChemin.get(indexCoupleFind.getFirst()).get(indexCoupleFind.getSecond());    
         }
-        for (int i = 0; i < seen.length; i++)
-        {
-            seen[i] = false;            
-        }
 
         Couple findPere = plusPetitChemin(allChemin.get(end.getID()));
 
-        while(plateau.GetCase(indexCoupleFind.getFirst()).getID() != start.getID())
+        while(findPere.getFirst() != start.getID())
         {
             cheminRapide.add(plateau.GetCase(findPere.getFirst()));
             int toVisit = findPere.getFirst();
             findPere = plusPetitChemin(allChemin.get(toVisit));
         }
+        cheminRapide.add(plateau.GetCase(findPere.getFirst()));
         Collections.reverse(cheminRapide);
 
         return cheminRapide;

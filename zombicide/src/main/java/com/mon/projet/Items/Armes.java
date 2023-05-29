@@ -100,11 +100,12 @@ public class Armes
 
    public String[] getInfoArme()
    {
-      String[] armeInfo = new String[4];
+      String[] armeInfo = new String[5];
       armeInfo[0] = "nom: " + nom;
       armeInfo[1] = "portee: " + portee;
       armeInfo[2] = "degats: " + degats;
       armeInfo[3] = "regleSpeciale: " + regleSpeciale;
+      armeInfo[4] = "Rarete: " + this.rarity;
 
       return armeInfo;
    }

@@ -67,6 +67,9 @@ public class Plateau
     public Cases GetHasardCase()
     {
         int random = Plateau.Random(100);
+        while(this.plateau[random].GetMonType() == Enums.FONCTIONCASE.SORTIE)
+            random = Plateau.Random(100);
+            
         return this.plateau[random];
     }
 
@@ -116,6 +119,18 @@ public class Plateau
             System.out.println();
         }
     }
+
+    public void PrintPlateauZombie()
+    {
+        for(int i = 0; i<cols; i++)
+        {
+            for(int j = 0; j<ligs; j++)
+            {
+                System.out.print("|" + this.plateau[i*cols+j].getListeZombie().size() + "|");
+            }
+            System.out.println();
+        }
+    } 
     
 //Getters et Setters 
     public int getTaille() 

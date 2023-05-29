@@ -15,21 +15,14 @@ public class Run
 	{
 		int[] plateauTest = new int[]{3,1,1,1,1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,0,0,1,0,1,1,0,1,1,1,0,0,1,1,1,1,0,1,1,1};
 		ArrayList<Couple> block = new ArrayList<Couple>();
-		block.add(new Couple(3, 0));
-		block.add(new Couple(3, 1));
-		block.add(new Couple(3, 2));
-		block.add(new Couple(0, 3));
-		block.add(new Couple(1, 3));
-
-		Plateau newPaPlateau = new Plateau(plateauTest,block, 10, 10);
-		Scanner scanner = new Scanner(System.in);
+		Couple newCoupletest = new Couple(2, 3);
+		block.add(newCoupletest);
 		int verifyNmbJoueur = 0;
-		String nmbJoueur = "5";
+		String nmbJoueur = "2";
 		System.out.println("entrer une Difficulté Facile/Moyen/Difficile/Suicide");
-		String difficulte = "Suicide";
-		newPaPlateau.PrintPlateau();
+		String difficulte = "Facile";
 		Enums.Difficulte difficulteEnum = Enums.Difficulte.Facile;
-		switch (difficulte.toLowerCase())
+		switch (difficulte)
 		{
             case "Facile":
                 difficulteEnum = Enums.Difficulte.Facile;
@@ -47,12 +40,6 @@ public class Run
                 System.out.println("Difficulté non reconnue");
                 break;
         }
-
-		
-		for (int i = 0; i < newPaPlateau.getPlateau()[2].GetVoisin().size(); i++) 
-		{
-			newPaPlateau.getPlateau()[2].GetVoisin().get(i).PrintCase();			
-		}
 
 		while(verifyNmbJoueur == 0)
 		{

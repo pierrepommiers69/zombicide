@@ -22,7 +22,7 @@ public class RobertMcCall extends Personnage
         this.nom = "RobertMcCall";
         this.pointsDeVie = 60;
         this.niveauExperience = 12;
-        this.idCases = 0;
+        this.idCases = 99;
         this.pointsAction = 5;
         this.competenceUnique = "Architecte Suprême";
         this.competencePassive = "Chronomètre";

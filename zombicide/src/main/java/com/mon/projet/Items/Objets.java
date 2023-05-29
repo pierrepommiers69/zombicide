@@ -99,12 +99,13 @@ public class Objets
 
     public String[] getInfoEquipement()
     {
-        String[] armeInfo = new String[5];
+        String[] armeInfo = new String[6];
         armeInfo[0] = "type: " + this.myType;
         armeInfo[1] = "soin: " + this.soin;
         armeInfo[2] = "attaque: " + this.attaque;
         armeInfo[3] = "chance: " + this.chance;
         armeInfo[4] = "precision: " + this.precision;
+        armeInfo[5] = "Rarete: " + this.rarity;
         return armeInfo;
     }
 }
