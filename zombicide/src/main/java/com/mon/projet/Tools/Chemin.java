@@ -1,5 +1,6 @@
 package com.mon.projet.Tools;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.mon.projet.PlateauZombicide.Cases;
 import com.mon.projet.PlateauZombicide.Plateau;
@@ -7,70 +8,98 @@ import com.mon.projet.PlateauZombicide.Plateau;
 
 public class Chemin 
 {
-    public static final Cases[] Djisktra(Cases start,  Plateau plateau, Cases end)
+    private static Couple plusPetitChemin(ArrayList<ArrayList<Couple>> traiter, boolean[] seen)
     {
-        Cases casePlusCourtes[] = null;
-        boolean[] seen = new boolean[100];
-        for (int i = 0; i < seen.length; i++)
+        Couple couple = null;
+        int mini = Integer.MAX_VALUE;
+
+        for (int index = 0; index < traiter.size(); index++)
         {
-            seen[i] = false;
-        }
-
-        int[] distance = new int[100];
-        for (int i = 0; i < seen.length; i++)
-        {
-            distance[i] = 1;
-        }
-
-        distance[start.getID()] = 0;
-        ArrayList<Couple> plusCourtChemin = new ArrayList<Couple>();
-        Couple newCouple = new Couple(0, start.getID());
-        plusCourtChemin.add(newCouple);
-
-        TableauCoupleArrayList[] tabMonChemin = new TableauCoupleArrayList[plateau.getTaille()];
-        tabMonChemin[0].Add(newCouple);
-
-        ArrayList<Cases> nodes = new ArrayList<Cases>();
-        nodes.add(start);
-
-        boolean endSeen = false;
-
-
-        while(!nodes.isEmpty() && endSeen == false)
-        {
-            Couple distanceMin = new Couple(Integer.MAX_VALUE, 0);
-            Cases mysmallCase;
-            int index = 0;
-            for (int i = 0; i < tabMonChemin.length; i++)
+            if(seen[index] == false)
             {
-                if(tabMonChemin[index].getArrayList().size() == 0 && seen[i] == false)
+                for (int i = 0; i < traiter.get(index).size(); i++)
                 {
-                    if(distanceMin.getFirst() >= tabMonChemin[i].minCouple().getFirst())
+                    if(mini> traiter.get(index).get(i).getFirst())
                     {
-                        distanceMin = tabMonChemin[i].minCouple();
-                        index = i;
+                        couple = new Couple(index, i);
+                        mini = traiter.get(index).get(i).getFirst();
                     }
-                }               
-            }
-
-            mysmallCase = nodes.get(index);
-            nodes.remove(index);
-            seen[mysmallCase.getID()] = true;
-            for (int i = 0; i < mysmallCase.GetVoisin().size(); i++)
-            {
-                Couple newCouple2 = new Couple(distance[mysmallCase.GetVoisin().get(i).getID()]+distance[mysmallCase.getID()], mysmallCase.getID());
-                tabMonChemin[mysmallCase.GetVoisin().get(i).getID()].Add(newCouple2);
-                if(!seen[mysmallCase.GetVoisin().get(i).getID()])
-                {
-                    if(end.getID() == mysmallCase.GetVoisin().get(i).getID())
-                    {
-                        endSeen = true;
-                    }
-                    nodes.add(mysmallCase.GetVoisin().get(i));
                 }
-            } 
+            }
+                        
+        }
+        return couple;      
+    }
+
+    private static Couple plusPetitChemin(ArrayList<Couple>traiter)
+    {
+        Couple couple = null;
+        int mini = Integer.MAX_VALUE;
+
+        for (int index = 0; index < traiter.size(); index++)
+        {
+            
+            if(mini> traiter.get(index).getFirst())
+            {
+                couple = traiter.get(index);
+                mini = traiter.get(index).getFirst();
+            }
+                        
+        }
+        return couple;      
+    }
+
+    public static final ArrayList<Cases> Djisktra(Cases start,  Plateau plateau, Cases end)
+    {
+        ArrayList<Cases> cheminRapide = new ArrayList<Cases>();
+        cheminRapide.add(cheminRapide.size()-1, end);
+        boolean[] seen = new boolean[plateau.getPlateau().length];
+        for (int i = 0; i < seen.length; i++)
+        {
+            seen[i] = false;            
         }
 
-        return casePlusCourtes;
+        ArrayList<ArrayList<Couple>> allChemin = new ArrayList<ArrayList<Couple>>();
+        for (int i = 0; i < seen.length; i++)
+        {
+            ArrayList<Couple> newCouple = new ArrayList<Couple>();
+            allChemin.add(newCouple);            
+        }
+
+        Couple couplegenesis = new Couple(start.getID(), 0);
+        allChemin.get(0).add(couplegenesis);
+        int indexSeen = seen.length; 
+        Couple indexCoupleFind = plusPetitChemin(allChemin, seen);
+        while(indexSeen > 0 && plateau.GetCase(indexCoupleFind.getFirst()).getID() != end.getID())
+        {
+            for (int i = 0; i < plateau.GetCase(indexCoupleFind.getFirst()).GetVoisin().size(); i++)
+            {
+                Couple voisin = new Couple(indexCoupleFind.getFirst(), couplegenesis.getFirst()+1);
+                if(seen[plateau.GetCase(indexCoupleFind.getFirst()).GetVoisin().get(i).getID()] == false)
+                {
+                    allChemin.get(plateau.GetCase(indexCoupleFind.getFirst()).GetVoisin().get(i).getID()).add(voisin);
+                }
+            }
+            seen[indexCoupleFind.getFirst()] = true;
+            indexSeen--;
+            indexCoupleFind = plusPetitChemin(allChemin, seen);
+            couplegenesis = allChemin.get(indexCoupleFind.getFirst()).get(indexCoupleFind.getSecond());    
+        }
+        for (int i = 0; i < seen.length; i++)
+        {
+            seen[i] = false;            
+        }
+
+        Couple findPere = plusPetitChemin(allChemin.get(end.getID()));
+
+        while(plateau.GetCase(indexCoupleFind.getFirst()).getID() != start.getID())
+        {
+            cheminRapide.add(plateau.GetCase(findPere.getFirst()));
+            int toVisit = findPere.getFirst();
+            findPere = plusPetitChemin(allChemin.get(toVisit));
+        }
+        Collections.reverse(cheminRapide);
+
+        return cheminRapide;
     }    
 }

@@ -34,7 +34,7 @@ public class Enums
 
     public enum Difficulte
     {
-        Sucide,
+        Suicide,
         Difficile,
         Moyen,
         Facile

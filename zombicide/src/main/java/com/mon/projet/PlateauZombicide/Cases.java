@@ -13,7 +13,7 @@ public class Cases
 {
     
     private int nbBruits;
-    private List<Personnage> listeSurvivant =new ArrayList<Personnage>();
+    private ArrayList<Personnage> listeSurvivant =new ArrayList<Personnage>();
     private Enums.FONCTIONCASE  fonctionCase;
     private ArrayList<Zombie> listeZombie = new ArrayList<Zombie>();
     private ArrayList<Cases> voisin = new ArrayList<Cases>();
@@ -66,14 +66,9 @@ public class Cases
 	}
 
 
-    public List<Personnage> GetListSurvivant()
+    public ArrayList<Personnage> GetListSurvivant()
     {
         return this.listeSurvivant;
-    }
-
-    public void setListSurvivant(List<Personnage> listeSurvivant) 
-    {
-        this.listeSurvivant = listeSurvivant;
     }
 
     public ArrayList<Cases> GetVoisin() 

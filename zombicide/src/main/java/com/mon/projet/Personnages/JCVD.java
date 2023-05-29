@@ -103,6 +103,12 @@ public class JCVD extends Personnage
     }
 
     @Override
+    public void SetLifePerso(int SetLife)
+    {
+        this.pointsDeVie = SetLife;
+    }
+
+    @Override
     public String[] GetInfo()
     {
         String[] personnageInfo = new String[10];

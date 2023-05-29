@@ -24,13 +24,31 @@ public class Run
 		Plateau newPaPlateau = new Plateau(plateauTest,block, 10, 10);
 		Scanner scanner = new Scanner(System.in);
 		int verifyNmbJoueur = 0;
-		System.out.println("entrer une nom de partie");
-		String nomPartie = scanner.nextLine();
-		System.out.println("entrer un nombre de joueur");
-		String nmbJoueur = scanner.nextLine();
-		System.out.println("entrer une Difficulté HARD/MEDIUM/EASY");
-		String difficulte = scanner.nextLine();
+		String nmbJoueur = "5";
+		System.out.println("entrer une Difficulté Facile/Moyen/Difficile/Suicide");
+		String difficulte = "Suicide";
 		newPaPlateau.PrintPlateau();
+		Enums.Difficulte difficulteEnum = Enums.Difficulte.Facile;
+		switch (difficulte.toLowerCase())
+		{
+            case "Facile":
+                difficulteEnum = Enums.Difficulte.Facile;
+                break;
+            case "Moyen":
+				difficulteEnum = Enums.Difficulte.Moyen;
+                break;
+            case "Difficile":
+				difficulteEnum = Enums.Difficulte.Difficile;
+                break;
+            case "Suicide":
+				difficulteEnum = Enums.Difficulte.Suicide;
+                break;
+            default:
+                System.out.println("Difficulté non reconnue");
+                break;
+        }
+
+		
 		for (int i = 0; i < newPaPlateau.getPlateau()[2].GetVoisin().size(); i++) 
 		{
 			newPaPlateau.getPlateau()[2].GetVoisin().get(i).PrintCase();			
@@ -38,10 +56,8 @@ public class Run
 
 		while(verifyNmbJoueur == 0)
 		{
-			System.out.println("nombre de joueur, 2-6");
-			String inputString = scanner.nextLine();
 			verifyNmbJoueur = 1;
-			Jeu newJeu = new Jeu(5, plateauTest, block, Enums.Difficulte.Facile);
+			Jeu newJeu = new Jeu(Integer.parseInt(nmbJoueur), plateauTest, block, difficulteEnum);
 		}
 	}
 	

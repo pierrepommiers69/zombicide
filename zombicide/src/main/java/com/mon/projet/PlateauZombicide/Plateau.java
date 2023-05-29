@@ -27,7 +27,7 @@ public class Plateau
         //Parcours du style de plateau
         for(int i = 0; i<differentCase.length; i++)
         {
-            if(differentCase[i] == 0)
+            if(differentCase[i] == 2)
             {
                 Cases caseSombre = new Cases(i , cols, ligs, 0,Enums.FONCTIONCASE.SOMBRE);
                 plateau[i] = caseSombre;
@@ -37,7 +37,7 @@ public class Plateau
                 Cases caseClaire = new Cases(i,cols, ligs, 0, Enums.FONCTIONCASE.CLAIR);
                 plateau[i] = caseClaire;
             }
-            if(differentCase[i] == 2)
+            if(differentCase[i] == 0)
             {
                 Cases caseObstacle = new Cases(i,cols, ligs,0, Enums.FONCTIONCASE.BONUS);
                 plateau[i] = caseObstacle;
@@ -83,7 +83,20 @@ public class Plateau
         return null;
     }
 
-
+    public Cases GetplusBruit()
+    {
+        int max  = 0;
+        int index = 0;
+        for (int i = 0; i < plateau.length; i++)
+        {
+            if(this.plateau[i].getNbBruits()>max)
+            {
+                max = this.plateau[i].getNbBruits();
+                index = i;
+            }            
+        }
+        return this.plateau[index];
+    }
 
     public static int Random(int intervalle)
     {

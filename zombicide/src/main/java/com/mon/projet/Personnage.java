@@ -46,6 +46,7 @@ public abstract class Personnage
     public abstract void SetLife(Objets objets);
     public abstract int GetPosition();
     public abstract void SetPosition(int x);
+    public abstract void SetLifePerso(int SetLife);
    
     
 
@@ -93,6 +94,8 @@ public abstract class Personnage
     {
         return personnagesJouables;
     }
+
+    
     
     public ArrayList<String[]> GetInfoPerso()
     {

@@ -1,10 +1,10 @@
 
 Commit template : 
 
-git commit -m "yourWallet0.1" -m "id = 1" 
--m " types of commit = BUGFIX"
--m " types of commit = Feature"
--m " types of commit = Merge/Integrate"
+git commit -m "Zombicide0.1" -m "id = 6" 
+-m "types of commit = BUGFIX"
+-m "types of commit = Feature"
+-m "types of commit = Merge/Integrate"
 -m "type of job = Prog"
 -m "type of job = Design"
 -m "type of job = level Design"
@@ -13,6 +13,6 @@ git commit -m "yourWallet0.1" -m "id = 1"
 
 key of the project : s
 
-tokenid = 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
+tokenid = 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
 
 mvn exec:java -Dexec.mainClass=com.mon.projet.Run

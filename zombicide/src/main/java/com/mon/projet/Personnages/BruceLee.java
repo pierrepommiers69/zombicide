@@ -99,6 +99,12 @@ public class BruceLee extends Personnage
     {
         this.idCases = x;
     }
+
+    @Override
+    public void SetLifePerso(int SetLife)
+    {
+        this.pointsDeVie = SetLife;
+    }
     
 
 

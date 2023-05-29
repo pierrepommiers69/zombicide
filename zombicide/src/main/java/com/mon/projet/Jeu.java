@@ -13,6 +13,7 @@ public class Jeu
 
     private int nmbJoueur;
     private ArrayList<Personnage> personnages = new ArrayList<Personnage>();
+    private ArrayList<Zombie> zombies = new ArrayList<Zombie>();
     private Plateau plateau;
     private Enums.Difficulte difficulte;
     public int generationCasesSombre;
@@ -37,7 +38,7 @@ public class Jeu
         {
             generationCaseSombre = 2; 
         }
-        else if(this.difficulte == Enums.Difficulte.Sucide)
+        else if(this.difficulte == Enums.Difficulte.Suicide)
         {
             generationCaseSombre = 4;
         }
@@ -109,10 +110,17 @@ public class Jeu
                 cases.setNbBruits(cases.getNbBruits()/2);
             }
 
-            for (int i = 0; i < nmbJoueur; i++)
+            for (int i = 0; i < this.personnages.size(); i++)
             {
                 this.personnages.get(i).Game(plateau);
             }
+            
+            for (int i = 0; i < this.zombies.size(); i++)
+            {
+                this.zombies.get(i).Game(plateau, plateau.GetplusBruit());
+            }
+            
+            int indexZombie = 0;
 
             for(int i = 0; i<plateau.getPlateau().length; i++)
             {
@@ -121,16 +129,18 @@ public class Jeu
                     int random = Plateau.Random(2);
                     if(random == 1)
                     {
-                        Zombie zombie = new Zombie(200, 15, 1,Enums.ZOMBIE.MOLOSSE);
+                        Zombie zombie = new Zombie(200, 15, 1,Enums.ZOMBIE.MOLOSSE, i, indexZombie);
                         plateau.getPlateau()[i].getListeZombie().add(zombie);
                     }
                     else
                     {
-                        Zombie zombie = new Zombie(100, 10, 2, Enums.ZOMBIE.RODEUR);
+                        Zombie zombie = new Zombie(100, 10, 2, Enums.ZOMBIE.RODEUR, i, indexZombie);
                         plateau.getPlateau()[i].getListeZombie().add(zombie);
                     }
+                    indexZombie++;
                 }                
             }
+
             
             for (int i = 0; i < this.personnages.size(); i++)
             {
